@@ -27,21 +27,21 @@ export default class LaunchScreen extends Component {
   }
 
   _handleBarCodeRead = data => {
+    Alert.alert('oi');
     this.props.navigation.navigate('InscricaoShowScreen', { inscricaoId: data});
   }
 
   render () {
     
     return (
+      
       <View style={styles.mainContainer}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Text>Aponte para o QRCode para mais detalhes sobre o participante</Text>
           </View>
-
           <View style={styles.centered} >
-            
             {this.state.hasCameraPermission === null ?
             <Text>Permissao</Text>:
             this.state.hasCameraPermission === false ?
