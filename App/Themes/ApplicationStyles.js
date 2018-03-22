@@ -74,6 +74,13 @@ const ApplicationStyles = {
     borderColor: Colors.ember,
     alignItems: 'center',
     textAlign: 'center'
+  },
+  header: {
+    backgroundColor: Colors.header,
+    color: Colors.white
+  },
+  headetText: {
+    color: Colors.white
   }
 }
 
