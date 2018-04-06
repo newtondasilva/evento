@@ -3,7 +3,7 @@ import { ScrollView, Text, KeyboardAvoidingView, Alert, View } from 'react-nativ
 import RoundedButton from '../Components/RoundedButton'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import { Container, Header, Content, Card, CardItem, Body, H2,List, ListItem, Title, Spinner, Left } from 'native-base';
+import { Container, Header, Content, Card, CardItem, Body, H2,List, ListItem, Title, Spinner, Left, Badge } from 'native-base';
 import { Button } from 'native-base';
 
 
@@ -37,14 +37,9 @@ class InscricaoShowScreen extends Component {
            resposta: resposta,
            resposta_itens: resposta.resposta_itens,
           });
-         
       }
-    );
-
-    
-    
+    );    
   }
-
 
   render () {
   
@@ -71,32 +66,34 @@ class InscricaoShowScreen extends Component {
                 <H2>{this.state.participante.nome}</H2>
               </CardItem>
               <CardItem>
-                {this.state.resposta === null ?
-                  <Body>
-                    <Text>Documento: {this.state.participante.documento}</Text>
-                    <Text>E-mail: {this.state.participante.email}</Text>
-                  </Body>
-                :
-                  <Text/>
-                }
+                <Body>
+                  <Text>Documento: {this.state.participante.documento}</Text>
+                  <Text>E-mail: {this.state.participante.email}</Text>
+                  <Text>Inscrição: {this.state.inscricao.id}</Text>
+                  {this.state.resposta.pago ?
+                    <Badge success><Text style={styles.cwhite}>Pago</Text></Badge>   
+                  :
+                    <Badge warning><Text style={styles.cwhite}>Não Pago</Text></Badge>   
+                  }
+                </Body>
               </CardItem>
-              
               {this.state.resposta === null ?
-                <CardItem>
+                <Body>
                   <Text>Vazio</Text>
-                </CardItem>
+                </Body>
                 :  
                 this.state.resposta_itens.map((resposta_item, index) => (
                   resposta_item.text ?
                   <CardItem key={index}>
-                    <Text key={index}>{resposta_item.text}</Text>
+                    <Body >
+                        <Text>{resposta_item.pergunta.nome}</Text>
+                        <Text>{resposta_item.text}</Text>
+                    </Body>
                   </CardItem>
                   :
                   <Text key={index}/>
                 ))
-              
               }
-            
           </Card>
           </Content>
         </Container>
